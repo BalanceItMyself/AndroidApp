@@ -15,6 +15,26 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class PostgreJDBC {
+    public static void main( String args[] ) {
+        Connection conn = null;
+        try {
+            Class.forName("org.postgresql.Driver");
+            conn = DriverManager.getConnection("jdbc:postgresql://172.17.0.1:5432/balanceit_db",
+                    "postgres", "")
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": "+e.getMessage());
+            System.exit(0);
+        }
+        System.out.println("Opened database successfully");
+    }
+
+}
+
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
